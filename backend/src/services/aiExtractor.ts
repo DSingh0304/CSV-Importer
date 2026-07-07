@@ -60,7 +60,7 @@ export async function extractBatch(
 ${JSON.stringify(batch, null, 2)}`;
 
     const response = await genai.models.generateContent({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-1.5-flash-latest',
       contents: prompt,
     });
 

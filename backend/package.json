@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google/genai": "^2.10.0",
+    "@google/generative-ai": "^0.24.1",
     "busboy": "^1.6.0",
     "cors": "^2.8.6",
     "csv-parse": "^7.0.1",

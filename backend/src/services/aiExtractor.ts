@@ -1,8 +1,8 @@
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { CRMRecord, AIBatchResult, SkippedRecord } from '../types';
 import { log } from '../utils/logger';
 
-const genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+const genai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 const SYSTEM_PROMPT = `You are a CRM data extraction specialist for GrowEasy, a real estate CRM platform.
 Your job is to analyze raw CSV records (provided as JSON objects with arbitrary column names) and intelligently map them to the GrowEasy CRM schema.
@@ -59,12 +59,10 @@ export async function extractBatch(
 ## Input Records (batch of ${batch.length})
 ${JSON.stringify(batch, null, 2)}`;
 
-    const response = await genai.models.generateContent({
-      model: 'gemini-1.5-flash-latest',
-      contents: prompt,
-    });
+    const model = genai.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const response = await model.generateContent(prompt);
 
-    const text = response.text || '';
+    const text = response.response.text();
     const cleaned = text
       .replace(/^```json\s*/i, '')
       .replace(/^```\s*/i, '')

@@ -1,0 +1,74 @@
+.rail {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  position: relative;
+}
+
+.indicator {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--r-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-3);
+  flex-shrink: 0;
+  transition:
+    background-color var(--dur-base) var(--ease),
+    border-color var(--dur-base) var(--ease),
+    color var(--dur-base) var(--ease);
+}
+
+.label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-3);
+  white-space: nowrap;
+  transition: color var(--dur-base) var(--ease);
+}
+
+.connector {
+  width: 48px;
+  height: 1.5px;
+  background: var(--border);
+  margin: 0 var(--sp-2);
+  flex-shrink: 0;
+  transition: background var(--dur-slow) var(--ease);
+}
+
+.connectorDone {
+  background: var(--accent);
+}
+
+/* States */
+.active .indicator {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.active .label { color: var(--text); }
+
+.complete .indicator {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.complete .label { color: var(--text-2); }
+
+@media (max-width: 540px) {
+  .label { display: none; }
+  .connector { width: 28px; }
+}

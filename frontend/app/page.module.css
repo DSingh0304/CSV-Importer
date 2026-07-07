@@ -1,0 +1,151 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandName {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.brandSep {
+  color: var(--text-3);
+  font-size: var(--text-sm);
+}
+
+.brandPage {
+  font-size: var(--text-sm);
+  color: var(--text-2);
+}
+
+.main {
+  flex: 1;
+  padding: var(--sp-12) 0;
+}
+
+.hero {
+  max-width: 560px;
+  margin-bottom: var(--sp-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.heroTitle {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.heroDesc {
+  font-size: var(--text-base);
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+.railWrapper {
+  margin-bottom: var(--sp-8);
+  padding: var(--sp-4) var(--sp-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  display: inline-flex;
+}
+
+.stepLabel {
+  margin-bottom: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.stepTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.stepDesc {
+  font-size: var(--text-sm);
+  color: var(--text-2);
+}
+
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--danger-light);
+  border: 1px solid var(--danger);
+  border-radius: var(--r-lg);
+  color: var(--danger-text);
+  font-size: var(--text-sm);
+  margin-bottom: var(--sp-5);
+}
+
+.content { width: 100%; }
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-4) 0;
+}
+
+.footerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--text-3);
+}
+
+.footerLink {
+  color: var(--text-3);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.footerLink:hover { color: var(--text); }
+
+@media (max-width: 640px) {
+  .heroTitle { font-size: var(--text-xl); }
+  .railWrapper { display: flex; width: 100%; }
+}

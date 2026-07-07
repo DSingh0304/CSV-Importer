@@ -59,7 +59,7 @@ export async function extractBatch(
 ## Input Records (batch of ${batch.length})
 ${JSON.stringify(batch, null, 2)}`;
 
-    const model = genai.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const model = genai.getGenerativeModel({ model: 'gemini-2.0-flash-lite' });
     const response = await model.generateContent(prompt);
 
     const text = response.response.text();

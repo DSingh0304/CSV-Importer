@@ -1,5 +1,8 @@
+import { GoogleGenAI } from '@google/genai';
 import { CRMRecord, AIBatchResult, SkippedRecord } from '../types';
 import { log } from '../utils/logger';
+
+const genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
 
 const SYSTEM_PROMPT = `You are a CRM data extraction specialist for GrowEasy, a real estate CRM platform.
 Your job is to analyze raw CSV records (provided as JSON objects with arbitrary column names) and intelligently map them to the GrowEasy CRM schema.
@@ -47,7 +50,6 @@ export async function extractBatch(
   retryCount = 0
 ): Promise<AIBatchResult> {
   const maxRetries = 2;
-  const apiKey = process.env.GEMINI_API_KEY || '';
 
   try {
     log('info', `Extracting batch ${batchIndex}, size=${batch.length}, attempt=${retryCount + 1}`);
@@ -57,22 +59,12 @@ export async function extractBatch(
 ## Input Records (batch of ${batch.length})
 ${JSON.stringify(batch, null, 2)}`;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
-      })
+    const response = await genai.models.generateContent({
+      model: 'gemini-1.5-flash',
+      contents: prompt,
     });
 
-    if (!response.ok) {
-      const errBody = await response.text();
-      throw new Error(`Gemini API Error (${response.status}): ${errBody}`);
-    }
-
-    const data = (await response.json()) as any;
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    
+    const text = response.text || '';
     const cleaned = text
       .replace(/^```json\s*/i, '')
       .replace(/^```\s*/i, '')
